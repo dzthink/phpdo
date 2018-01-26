@@ -1,0 +1,12 @@
+{
+    "name": "dzthink/phpdo",
+    "description": "a simple php framework let you just begin right now",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "dzthink",
+            "email": "dzthink@qq.com"
+        }
+    ],
+    "require": {}
+}
