@@ -6,10 +6,37 @@ namespace phpdo;
  * @Author dzthink@qq.com
  * @Date: 2017/8/11
  */
-abstract class PHPDO {
+class PHPDO {
+
+
+    public function __construct(IConfig $config) {
+
+    }
 
     /**
-     *  根据应用类型创建不同类型application context
+     *  创建context
+     * @return IContext
      */
-    protected abstract function createContext();
+    public function makeContext() {
+        return null;
+    }
+
+
+    /**
+     * 处理请求
+     * @param IContext $context
+     * @return IContext
+     */
+    public function process(IContext $context) {
+        return null;
+    }
+
+
+    /**
+     * 回收数据
+     * @return void
+     */
+    public function terminate() {
+
+    }
 }
