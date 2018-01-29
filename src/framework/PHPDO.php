@@ -6,32 +6,47 @@ namespace phpdo;
  * @Author dzthink@qq.com
  * @Date: 2017/8/11
  */
+
+//todo 异常处理
 class PHPDO {
 
-
-    public function __construct(IConfig $config) {
-
-    }
+    /**
+     * @var IContainer
+     */
+    protected $container;
 
     /**
-     *  创建context
-     * @return IContext
+     * @var IConfig
      */
-    public function makeContext() {
-        return null;
-    }
+    protected $config;
 
+    /**
+     * @var ProcessFlow
+     */
+    protected $processFlow;
+
+
+    public function __construct(IConfig $config, IContainer $container = null) {
+        $this->config = $config;
+
+        //todo if $contailer is null, create a default one
+        $this->container = $container;
+        
+        $this->processFlow = new ProcessFlow();
+    }
 
     /**
      * 处理请求
-     * @param IContext $context
-     * @return IContext
+     * @param Context $context
+     * @param IProcessor|\Closure $dispatcher
+     * @return Context 
      */
-    public function process(IContext $context) {
+    public function go(Context $context, IProcessor $dispatcher) {
         return null;
     }
 
 
+    
     /**
      * 回收数据
      * @return void

@@ -9,7 +9,22 @@
 namespace phpdo;
 
 
-class IContainer
-{
+interface IContainer {
 
+    /**
+     * make a instance from container
+     * @param $abstract
+     * @param array $parameters
+     * @return mixed
+     */
+    public function make($abstract, $parameters = []);
+
+    /**
+     * 绑定接口和实现
+     * @param $abstract string 接口
+     * @param $concrete \Closure|string 创建方法
+     * @param bool $shared 单例/共享
+     * @return mixed
+     */
+    public function bind($abstract, $concrete, $shared = true);
 }
