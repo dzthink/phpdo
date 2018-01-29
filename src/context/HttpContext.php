@@ -6,8 +6,10 @@
  * Time: 19:30
  */
 
-namespace phpdo;
+namespace phpdo\context;
 
+
+use phpdo\framework\Context;
 
 class HttpContext extends Context {
 

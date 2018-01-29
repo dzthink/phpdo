@@ -6,8 +6,12 @@
  * Time: 19:31
  */
 
-namespace phpdo;
+namespace phpdo\processor;
 
+
+use phpdo\framework\Context;
+use phpdo\framework\IProcessor;
+use phpdo\framework\ProcessFlow;
 
 class RouteProcessor implements IProcessor {
 
@@ -18,8 +22,7 @@ class RouteProcessor implements IProcessor {
      * @return bool|IProcessor
      * @throws \Exception
      */
-    public function process(Context $context, ProcessFlow $processFlow)
-    {
+    public function process(Context $context, ProcessFlow $processFlow) {
         // TODO: Implement process() method.
     }
 }

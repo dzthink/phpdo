@@ -6,7 +6,7 @@
  * Time: 17:27
  */
 
-namespace phpdo;
+namespace phpdo\framework;
 
 
 class ILog {

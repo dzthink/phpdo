@@ -6,7 +6,7 @@
  * Time: 18:30
  */
 
-namespace phpdo;
+namespace phpdo\framework;
 
 
 class ProcessFlow {

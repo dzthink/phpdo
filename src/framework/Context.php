@@ -6,7 +6,7 @@
  * Time: 17:07
  */
 
-namespace phpdo;
+namespace phpdo\framework;
 
 
 abstract class Context{

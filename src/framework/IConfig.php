@@ -6,7 +6,7 @@
  * Time: 18:31
  */
 
-namespace phpdo;
+namespace phpdo\framework;
 
 
 interface IConfig

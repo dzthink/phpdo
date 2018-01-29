@@ -3,7 +3,7 @@
  * processor 接口定义
  */
 
-namespace phpdo;
+namespace phpdo\framework;
 
 
 interface IProcessor {

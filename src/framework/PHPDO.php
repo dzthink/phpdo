@@ -1,5 +1,5 @@
 <?php
-namespace phpdo;
+namespace phpdo\framework;
 
 /**
  * phpdo核心

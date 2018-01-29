@@ -6,7 +6,7 @@
  * Time: 18:32
  */
 
-namespace phpdo;
+namespace phpdo\framework;
 
 
 interface IContainer {
