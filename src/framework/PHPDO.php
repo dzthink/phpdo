@@ -7,7 +7,6 @@ namespace phpdo;
  * @Date: 2017/8/11
  */
 
-//todo 异常处理
 class PHPDO {
 
     /**
@@ -37,16 +36,18 @@ class PHPDO {
 
     /**
      * 处理请求
-     * @param Context $context
      * @param IProcessor|\Closure $dispatcher
      * @return Context 
      */
-    public function go(Context $context, IProcessor $dispatcher) {
-        return null;
+    public function go(IProcessor $dispatcher) {
+        $context = $this->makeContext();
+        $this->processFlow->back($dispatcher);
+        $this->processFlow->process($context);
+        return $context;
     }
 
 
-    
+
     /**
      * 回收数据
      * @return void
@@ -54,4 +55,21 @@ class PHPDO {
     public function terminate() {
 
     }
+
+    /**
+     * 创建context
+     * @return Context
+     */
+    protected function makeContext() {
+        return null;
+    }
+
+    /**
+     * 获取容器对象
+     * @return IContainer
+     */
+    public function getContainer() {
+        return $this->container;
+    }
+
 }

@@ -12,33 +12,104 @@ namespace phpdo;
 abstract class Context{
 
 
-    public function __construct(PHPDO $PHPDO) {
-        
+    /**
+     * @var IConfig
+     */
+    protected $config;
+
+    /**
+     * @var IContainer
+     */
+    protected $container;
+
+    /**
+     * @var array
+     */
+    protected $exception;
+
+    /**
+     * @var array
+     */
+    protected $state;
+
+    public function __construct(IConfig $config, IContainer $container) {
+        $this->container = $container;
+        $this->config = $config;
     }
 
     /**
-     * 获取配置信息
-     * @param string $key
+     * 获取配置
+     * @return IConfig
+     */
+    public function getConfig(): IConfig {
+        return $this->config;
+    }
+
+
+    /**
+     * 获取container
+     * @return IContainer
+     */
+    public function getContainer(): IContainer {
+        return $this->container;
+    }
+
+
+    /**
+     * exception处理
+     * @param \Exception $e
+     */
+    public function pushException(\Exception $e) {
+        array_push($this->exception, $e);
+    }
+
+    /**
+     * 初始化
      * @return void
      */
-    public function config($key) {
-        
-    }
+    abstract public function initialize();
 
     /**
-     * container proxy
-     * @param $class
+     * 取出最后一个exception
+     * @return \Exception
+     */
+    public function popException() {
+        return array_pop($this->exception);
+    }
+    /**
+     * 查看后异常
+     * @return \Exception
+     */
+    public function peekException() {
+        $length = count($this->exception);
+        return $length == 0? null : $this->exception[$length - 1];
+    }
+
+
+    /**
+     * @param string $key
      * @return mixed
      */
-    public function make($class) {
+    public function getState($key = null) {
         return null;
     }
 
-
     /**
-     * 输出
+     *
+     * @param string $key
+     * @param mixed $state
      * @return void
      */
-    abstract public function output();
+    public function putState($key, $state) {
+
+    }
+
+    /**
+     * 设置state值
+     * @param array $state
+     */
+    public function setState($state) {
+
+    }
 
 }

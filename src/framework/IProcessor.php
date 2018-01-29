@@ -12,7 +12,7 @@ interface IProcessor {
      * 处理请求
      * @param Context $context
      * @param ProcessFlow $processFlow
-     * @return bool
+     * @return bool|IProcessor
      * @throws \Exception
      */
     public function process(Context $context, ProcessFlow $processFlow);

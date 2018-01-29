@@ -23,24 +23,30 @@ class ProcessFlow {
 
     public function __construct() {
         $this->clear();
+        $this->interceptError();
     }
 
     /**
      * 请求处理
      * @param Context $context
-     * @throws \Exception
      */
     public function process(Context $context) {
-        foreach($this->processors as $p) {
-            try {
-                if(!$p->process($context, $this)) {
+        while (($p = array_shift($this->processors)) != null) {
+            try{
+                $ret = $p->process($context, $this);
+                //强行终止
+                if(false === $ret) {
                     break;
                 }
+
+                if($ret instanceof IProcessor) {
+                    $this->front($ret);
+                }
             } catch (\Exception $e) {
-                //todo process 异常处理
+                $context->pushException($e);
             }
+
         }
-        $context->output();
     }
 
 
@@ -49,19 +55,15 @@ class ProcessFlow {
      * @param IProcessor $processor
      * @return void
      */
-    public function push(IProcessor $processor) {
+    public function back(IProcessor $processor) {
         array_push($this->processors, $processor);
     }
 
     /**
      * @param IProcessor $processor
-     * @param $index
      */
-    public function insert(IProcessor $processor, $index = -1) {
-        if($index == -1) {
-            $index = count($this->processors) - 1;
-        }
-        array_splice($this->processors, $this->current, array($processor));
+    public function front(IProcessor $processor) {
+        array_unshift($this->processors, $processor);
     }
 
     /**
@@ -69,6 +71,15 @@ class ProcessFlow {
      */
     public function clear() {
         $this->processors = array();
-        $this->index = 0;
+    }
+
+
+    /**
+     * 将严重错误转换为ErrorException
+     */
+    protected function interceptError() {
+        set_error_handler(function($code, $msg, $file, $line){
+            throw new \ErrorException($msg, $code, 1, $file, $line);
+        });
     }
 }
