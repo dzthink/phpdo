@@ -8,5 +8,13 @@
             "email": "dzthink@qq.com"
         }
     ],
-    "require": {}
+    "require": {
+        "symfony/http-foundation": "^4.0"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
 }

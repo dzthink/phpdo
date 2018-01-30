@@ -10,6 +10,8 @@ namespace phpdo\context;
 
 
 use phpdo\framework\Context;
+use phpdo\framework\IConfig;
+use phpdo\framework\IContainer;
 use phpdo\http\Request;
 use phpdo\http\Response;
 
@@ -25,13 +27,18 @@ class HttpContext extends Context {
      */ 
     protected $resp;
 
+    public function __construct(IConfig $config, IContainer $container) {
+        parent::__construct($config, $container);
+        $this->req = new Request();
+        $this->resp = new Response();
+    }
+
     /**
      * 初始化
      * @return void
      */
-    public function initialize()
-    {
-        // TODO: Implement initialize() method.
+    public function initialize() {
+
     }
 
     /**
@@ -39,7 +46,7 @@ class HttpContext extends Context {
      * @return Request
      */
     public function request() {
-        return null;
+        return $this->req;
     }
 
     /**
@@ -47,6 +54,6 @@ class HttpContext extends Context {
      * @return Response
      */
     public function Response() {
-        return null;
+        return $this->resp;
     }
 }

@@ -9,47 +9,9 @@
 namespace phpdo\http;
 
 
-class Request {
+use Symfony\Component\HttpFoundation\Request as SymfonyHttpRequest;
 
-    /**
-     * 获取协议
-     * @return string
-     */
-    public function schema() {
-
-    }
-
-    /**
-     * 获取host
-     * @return string
-     */
-    public function host() {
-
-    }
-
-    /**
-     * 获取请求方法
-     * @return string
-     */
-    public function method() {
-        
-    }
-    /**
-     * 获取uri
-     * @return string
-     */
-    public function uri() {
-
-    }
-
-    /**
-     * 获取查询参数
-     * @return string
-     */
-    public function query() {
-        
-    }
-
+class Request extends SymfonyHttpRequest {
     /**
      * 获取制定参数
      * @param $key
@@ -57,31 +19,15 @@ class Request {
      * @return mixed
      */
     public function get($key = "", $default = null) {
-        
-    }
-
-    /**
-     * 获取请求头 
-     * @return string
-     */
-    public function header($key) {
-        
-    }
-
-    /**
-     * 获取所有请求头
-     * @return array
-     */
-    public function headers() {
-        
+        $this->query->get($key, $default);
     }
 
     /**
      * 获取cookie
      * @return Cookie
      */
-    public function cookie() {
-        
+    public function cookie($key, $default = null) {
+        $this->cookies->get($key, $default);
     }
 
     /**
@@ -91,7 +37,7 @@ class Request {
      * @return mixed
      */
     public function post($key = "", $default = null) {
-
+        $this->request->get($key, $default);
     }
 
     /**
@@ -99,7 +45,7 @@ class Request {
      * @return string
      */
     public function body() {
-
+        $this->getContent();
     }
 
     /**
