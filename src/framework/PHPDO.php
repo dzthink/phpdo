@@ -7,6 +7,7 @@ namespace phpdo\framework;
  * @Date: 2017/8/11
  */
 
+use phpdo\container\Container;
 class PHPDO {
 
     /**
@@ -25,10 +26,12 @@ class PHPDO {
     protected $processFlow;
 
 
-    public function __construct(IConfig $config, IContainer $container = null) {
+    public function __construct(IConfig $config = null, IContainer $container = null) {
         $this->config = $config;
 
-        //todo if $contailer is null, create a default one
+        if(is_null($container)) {
+            $container = new Container();
+        }
         $this->container = $container;
         
         $this->processFlow = new ProcessFlow();
@@ -36,11 +39,11 @@ class PHPDO {
 
     /**
      * 处理请求
+     * @param Context $context
      * @param IProcessor|\Closure $dispatcher
      * @return Context 
      */
-    public function go(IProcessor $dispatcher) {
-        $context = $this->makeContext();
+    public function go(Context $context, IProcessor $dispatcher) {
         $this->processFlow->back($dispatcher);
         $this->processFlow->process($context);
         return $context;
@@ -60,9 +63,9 @@ class PHPDO {
      * 创建context
      * @return Context
      */
-    protected function makeContext() {
+    public function makeContext() {
         $context = $this->container->make(Context::class);
-        $context->initialize(); 
+        $context->initialize($this->config, $this->container);
         return $context;
     }
 

@@ -32,11 +32,6 @@ abstract class Context{
      */
     protected $state;
 
-    public function __construct(IConfig $config, IContainer $container) {
-        $this->container = $container;
-        $this->config = $config;
-    }
-
     /**
      * 获取配置
      * @return IConfig
@@ -67,7 +62,10 @@ abstract class Context{
      * 初始化
      * @return void
      */
-    abstract public function initialize();
+    public function initialize(IConfig $config, IContainer $container) {
+        $this->config = $config;
+        $this->container = $container;
+    }
 
     /**
      * 取出最后一个exception

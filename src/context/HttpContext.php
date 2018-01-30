@@ -27,9 +27,7 @@ class HttpContext extends Context {
      */ 
     protected $resp;
 
-    public function __construct(IConfig $config, IContainer $container) {
-        parent::__construct($config, $container);
-        $this->req = new Request();
+    public function __construct() {
         $this->resp = new Response();
     }
 
@@ -37,7 +35,9 @@ class HttpContext extends Context {
      * 初始化
      * @return void
      */
-    public function initialize() {
+    public function initialize(IConfig $config, IContainer $container) {
+        parent::initialize($config, $container);
+        $this->req = Request::createFromGlobals();
 
     }
 
@@ -55,5 +55,12 @@ class HttpContext extends Context {
      */
     public function Response() {
         return $this->resp;
+    }
+
+    /**
+     * @param Request $req
+     */
+    public function setRequest($req) {
+        $this->req = $req;
     }
 }

@@ -9,20 +9,21 @@
 namespace phpdo\processor;
 
 
+use phpdo\context\HttpContext;
 use phpdo\framework\Context;
 use phpdo\framework\IProcessor;
 use phpdo\framework\ProcessFlow;
 
-class RouteProcessor implements IProcessor {
+class HttpRouteProcessor implements IProcessor {
 
     /**
      * 处理请求
-     * @param Context $context
+     * @param HttpContext $context
      * @param ProcessFlow $processFlow
      * @return bool|IProcessor
      * @throws \Exception
      */
-    public function process(Context $context, ProcessFlow $processFlow) {
-        // TODO: Implement process() method.
+    public function process($context, ProcessFlow $processFlow) {
+        echo $context->request()->getPathInfo();
     }
 }

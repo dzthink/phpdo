@@ -14,10 +14,9 @@ interface IContainer {
     /**
      * make a instance from container
      * @param $abstract
-     * @param array $parameters
      * @return mixed
      */
-    public function make($abstract, $parameters = []);
+    public function make($abstract);
 
     /**
      * 绑定接口和实现

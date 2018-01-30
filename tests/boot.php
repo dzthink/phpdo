@@ -1,7 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: zxduan
- * Date: 2018/1/26
- * Time: 18:43
- */
+require_once "../vendor/autoload.php";
+set_include_path(get_include_path() . PATH_SEPARATOR . dirname(__DIR__). DIRECTORY_SEPARATOR . "src");
+spl_autoload_register(function($class){
+
+    if(strpos($class, 'phpdo\\') === 0) {
+        $path = str_replace("phpdo", "", $class);
+        $path = str_replace("\\", "/", $path);
+        require dirname(__DIR__) . DIRECTORY_SEPARATOR ."src" .  $path . ".php";
+    }
+});

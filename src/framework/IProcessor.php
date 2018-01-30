@@ -15,6 +15,6 @@ interface IProcessor {
      * @return bool|IProcessor
      * @throws \Exception
      */
-    public function process(Context $context, ProcessFlow $processFlow);
+    public function process($context, ProcessFlow $processFlow);
 
 }
