@@ -9,7 +9,6 @@
 namespace phpdo\http;
 
 
-class Response
-{
+class Response {
 
 }

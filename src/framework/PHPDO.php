@@ -61,7 +61,9 @@ class PHPDO {
      * @return Context
      */
     protected function makeContext() {
-        return null;
+        $context = $this->container->make(Context::class);
+        $context->initialize(); 
+        return $context;
     }
 
     /**
