@@ -48,21 +48,4 @@ class Request extends SymfonyHttpRequest {
         $this->getContent();
     }
 
-    /**
-     * 获取服务器器环境变量
-     * @return mixed
-     */
-    public function server($key) {
-
-    }
-
-    /**
-     * 获取文件信息
-     * @return array
-     */
-    public function file($name) {
-
-    }
-
-
 }
