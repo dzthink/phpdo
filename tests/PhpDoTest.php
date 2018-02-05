@@ -9,9 +9,14 @@
 namespace phpdo\tests;
 
 
+use phpdo\context\HttpContext;
+use phpdo\framework\Config;
+use phpdo\framework\Context;
+use phpdo\framework\PHPDO;
+use PHPUnit\Framework\SkippedTest;
 use PHPUnit\Framework\TestCase;
 
-class PhpDoTest extends TestCase {
+abstract class PhpDoTest extends TestCase {
 
     /**
      * @var \phpdo\framework\PHPDO
@@ -20,7 +25,7 @@ class PhpDoTest extends TestCase {
 
     public function setUp() {
         parent::setUp();
-        $this->PHPDO = new \phpdo\framework\PHPDO(new \phpdo\framework\Config());
+        $this->PHPDO = new PHPDO(new Config());
         $container = $this->PHPDO->getContainer();
         $container->bind(Context::class, HttpContext::class);
     }

@@ -10,7 +10,6 @@
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
         forceCoversAnnotation="false"
-        mapTestClassNameToCoveredClassName="false"
         printerClass="PHPUnit_TextUI_ResultPrinter"
         processIsolation="false"
         stopOnError="false"
@@ -23,9 +22,15 @@
         timeoutForLargeTests="60"
         verbose="false">
 
+
     <testsuites>
         <testsuite name="unit">
             <directory>framework</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <exclude><file>PhpDoTest.php</file></exclude>
+        </whitelist>
+    </filter>
 </phpunit>

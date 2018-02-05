@@ -6,39 +6,51 @@
 namespace phpdo\tests\framework;
 
 
+use phpdo\context\HttpContext;
+use phpdo\framework\IProcessor;
+use phpdo\http\Request;
+use phpdo\processor\route\HttpRouteProcessor;
 use phpdo\tests\PhpDoTest;
 
 class HttpRouteProcessorTest extends PhpDoTest {
 
     /**
-     * 测试添加route
+     * @var HttpContext
      */
-    public function testAddRoute() {
+    protected $context;
 
+    /**
+     * @var array
+     */
+    protected $route;
+    
+    public function setUp(){
+        parent::setUp();
+        $this->context = $this->PHPDO->makeContext();
+        $this->route = array(
+            array("GET", "path"=>"test/12", "processors" => array(function($context, $processFlow) {
+                
+            })),
+            array("GET", "path"=>"test/13", "processors" => array("HttpProcessorDemo:test13")),
+            array("GET", "pattern"=>'\/test\/12', "processors" => array(function($context, $processorFlow) {
+
+            })),
+            array("GET", "pattern"=>'\/test\/13', "processors" => array("HttpProcessorDemo:test13")),
+            array("POST", "path"=>"test/12", "processors" => array(function($context, $processFlow){
+
+            })),
+        );
     }
 
-    public function testAddRoutes() {
 
-    }
-
-
-    public function testGet() {
-
-    }
-
-    public function testPost() {
-
-    }
-
-    public function testPut() {
-
-    }
-
-    public function testDelete() {
-
-    }
-
-    public function testParseRoute() {
-
+    public function testParseRouteSuccess() {
+        $httpRouteProcessor = HttpRouteProcessor::createWithArray($this->route);
+        
+        $this->context->setRequest(Request::create("/test/12", "GET"));
+        $ret = $httpRouteProcessor->parseRoute($this->context);
+        $this->assertTrue(is_array($ret));
+        foreach($ret as $p) {
+            $this->assertTrue($p instanceof IProcessor);
+        }
     }
 }
