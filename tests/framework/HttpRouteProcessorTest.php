@@ -10,6 +10,7 @@ use phpdo\context\HttpContext;
 use phpdo\framework\IProcessor;
 use phpdo\http\Request;
 use phpdo\processor\route\HttpRouteProcessor;
+use phpdo\processor\wrapper\FunctionProcessor;
 use phpdo\tests\PhpDoTest;
 
 class HttpRouteProcessorTest extends PhpDoTest {
@@ -48,9 +49,8 @@ class HttpRouteProcessorTest extends PhpDoTest {
         
         $this->context->setRequest(Request::create("/test/12", "GET"));
         $ret = $httpRouteProcessor->parseRoute($this->context);
-        $this->assertTrue(is_array($ret));
-        foreach($ret as $p) {
-            $this->assertTrue($p instanceof IProcessor);
-        }
+        $this->assertTrue(is_array($ret) && count($ret) == 1);
+        $this->assertTrue($ret[0] instanceof FunctionProcessor);
+        
     }
 }
